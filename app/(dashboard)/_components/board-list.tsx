@@ -19,7 +19,7 @@ import OrgCard from "@/app/(dashboard)/_components/org-card";
 import NewOrgButton from "@/app/(dashboard)/_components/new-org-button";
 
 const BoardList = ({orgId, query}: BoardListProps) => {
-    const data = useQuery(api.orgs.get, {orgId, search: query.search})
+    const data = useQuery(api.orgs.get, {orgId, ...query,})
 
     if (data === undefined) {
 
