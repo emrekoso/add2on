@@ -11,7 +11,7 @@ import {toast} from "sonner";
 
 const EmptyOrgs = () => {
     const {organization} = useOrganization();
-    const {mutate, pending} = useApiMutation(api.orgs.create)
+    const {mutate, pending} = useApiMutation(api.org.create)
 
     const onClick = () => {
         if (!organization) return
