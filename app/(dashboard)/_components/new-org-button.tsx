@@ -5,12 +5,14 @@ import {Plus} from "lucide-react";
 import {api} from "@/convex/_generated/api";
 import {useApiMutation} from "@/hooks/use-api-mutation";
 import {toast} from "sonner";
+import {useRouter} from "next/navigation";
 
 interface NewOrgButtonProps {
     orgId: string;
     disabled?: boolean;
 };
 const NewOrgButton = ({orgId, disabled}: NewOrgButtonProps) => {
+    const router = useRouter();
     const {mutate, pending} = useApiMutation(api.org.create)
     const onClick = () => {
         mutate({
@@ -19,6 +21,7 @@ const NewOrgButton = ({orgId, disabled}: NewOrgButtonProps) => {
         })
             .then((id) => {
                 toast.success("Org created succesfully.")
+                router.push(`org/${id}`)
             })
             .catch(() => toast.error("Failed to create org."))
     }

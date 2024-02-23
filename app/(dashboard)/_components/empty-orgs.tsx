@@ -2,6 +2,7 @@
 import Image from "next/image";
 import {useMutation} from "convex/react";
 import {api} from "@/convex/_generated/api"
+import {useRouter} from "next/navigation";
 
 import React from 'react';
 import {Button} from "@/components/ui/button";
@@ -10,6 +11,7 @@ import {useApiMutation} from "@/hooks/use-api-mutation";
 import {toast} from "sonner";
 
 const EmptyOrgs = () => {
+    const router = useRouter();
     const {organization} = useOrganization();
     const {mutate, pending} = useApiMutation(api.org.create)
 
@@ -21,6 +23,7 @@ const EmptyOrgs = () => {
         })
             .then((id) => {
                 toast.success("Org created succesfully.")
+                router.push(`org/${id}`)
             })
             .catch(() => toast.error("Failed to create org."))
     }
